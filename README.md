@@ -21,5 +21,15 @@ Follow these steps to set up and run the project locally:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/bouncing-balls-webserver.git
+git clone [https://github.com/yourusername/bouncing-balls-webserver.git](https://github.com/YLiu-101/rasberrypi-web-server.git)
 cd bouncing-balls-webserver
+
+```
+### 2. Compile and Run Java Servers
+```bash
+javac Server.java
+java Server
+```
+
+### 3. See the results!
+type in [127.0.0.1](http://127.0.0.1/)
