@@ -1,4 +1,6 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -11,7 +13,7 @@ public class ClientHandler implements Runnable{
     public ClientHandler(Socket socket) {
         try {
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.pw = new PrintWriter(socket.getOutputStream(), true);
+            this.pw = new PrintWriter(socket.getOutputStream(), false);
         } catch (IOException e){
             System.out.println("Oh no!");
         }
@@ -22,10 +24,14 @@ public class ClientHandler implements Runnable{
         try {
             String line;
             if ((line = this.reader.readLine()).startsWith("GET")){
+                File f = new File("index.html");
+                BufferedReader fileReader = new BufferedReader(new FileReader(f));
                 pw.println("HTTP/1.1 200 OK\r\n" +
-                "Content-Type: text/html\r\n\r\n" +
-                "<html><body><h1>Welcome to the Simple Web Server</h1></body></html>");
-                // pw.flush();            
+                "Content-Type: text/html\r\n\r\n");
+                while ((line = fileReader.readLine())!=null){
+                    pw.println(line);
+                }
+                pw.flush();            
             }
             reader.close();
             pw.close();
