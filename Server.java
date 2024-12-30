@@ -20,8 +20,9 @@ public class Server{
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected...");
                 ClientHandler c = new ClientHandler(socket); // some way to deal with the socket/client relationship now
-                Thread t = new Thread(c);
-                t.start();
+                c.run();
+                // Thread t = new Thread(c);
+                // t.start();
             } catch (IOException e){
                 System.out.println("Something wen wrong");
             }
